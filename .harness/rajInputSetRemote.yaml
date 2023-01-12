@@ -1,0 +1,32 @@
+inputSet:
+  identifier: "rajInputSetRemote"
+  name: "rajInputSetRemote"
+  orgIdentifier: "default"
+  projectIdentifier: "rajTest"
+  pipeline:
+    identifier: "rajPipelineRemote"
+    stages:
+    - stage:
+        identifier: "testStage"
+        type: "Deployment"
+        spec:
+          service:
+            serviceInputs:
+              serviceDefinition:
+                type: "Kubernetes"
+                spec:
+                  artifacts:
+                    primary:
+                      type: "DockerRegistry"
+                      spec:
+                        tag: "<+input>"
+            serviceRef: "newService"
+          environment:
+            environmentRef: "rajEnvName"
+            infrastructureDefinitions:
+            - identifier: "adsdasd"
+              inputs:
+                identifier: "adsdasd"
+                type: "KubernetesDirect"
+                spec:
+                  connectorRef: "<+input>"
