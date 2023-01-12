@@ -1,0 +1,63 @@
+pipeline:
+  name: rajPipelineRemote
+  identifier: rajPipelineRemote
+  projectIdentifier: rajTest
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: testStage
+        identifier: testStage
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: <+input>
+            serviceInputs: <+input>
+          environment:
+            environmentRef: <+input>
+            deployToAll: false
+            environmentInputs: <+input>
+            infrastructureDefinitions: <+input>
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+              - step:
+                  name: rajTemp
+                  identifier: rajTemp
+                  template:
+                    templateRef: account.Get_K8s_Job_Logs
+                    versionLabel: "1"
+                    templateInputs:
+                      type: ShellScript
+                      spec:
+                        environmentVariables:
+                          - name: namespace
+                            type: String
+                            value: <+input>
+                          - name: job_name
+                            type: String
+                            value: <+input>
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
