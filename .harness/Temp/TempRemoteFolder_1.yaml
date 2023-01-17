@@ -11,14 +11,18 @@ template:
     spec:
       deploymentType: Kubernetes
       service:
-        serviceRef: <+input>
-        serviceInputs: <+input>
+        serviceRef: adsas
       environment:
-        environmentRef: <+input>
+        environmentRef: rajEnvName
         deployToAll: false
-        environmentInputs: <+input>
-        serviceOverrideInputs: <+input>
-        infrastructureDefinitions: <+input>
+        infrastructureDefinitions:
+          - identifier: adsdasd
+            inputs:
+              identifier: adsdasd
+              type: KubernetesDirect
+              spec:
+                connectorRef: <+input>
+                namespace: <+input>
       execution:
         steps:
           - step:
