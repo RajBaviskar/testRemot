@@ -21,3 +21,19 @@ pipeline:
                 environmentRef: <+input>
                 environmentInputs: <+input>
                 infrastructureDefinitions: <+input>
+    - stage:
+        name: chdh
+        identifier: chdh
+        template:
+          templateRef: sameRemoDiffBranch
+          versionLabel: "1"
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: <+input>
+                serviceInputs: <+input>
+              environment:
+                environmentRef: <+input>
+                environmentInputs: <+input>
+                infrastructureDefinitions: <+input>
