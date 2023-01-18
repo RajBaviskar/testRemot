@@ -1,0 +1,26 @@
+pipeline:
+  name: remoteDiffPipeline
+  identifier: remoteDiffPipeline
+  projectIdentifier: rajTest
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: remoteDiff
+        identifier: remoteDiff
+        template:
+          templateRef: remoteDiff
+          versionLabel: "1"
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          type: DockerRegistry
+                          spec:
+                            tag: <+input>
