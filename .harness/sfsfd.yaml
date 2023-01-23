@@ -1,0 +1,49 @@
+pipeline:
+  name: sfsfd
+  identifier: sfsfd
+  projectIdentifier: rajTest
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: adasd
+        identifier: adasd
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: CustomApproval
+                  name: dasda
+                  identifier: dasda
+                  timeout: 1d
+                  spec:
+                    shell: Bash
+                    retryInterval: 10s
+                    scriptTimeout: 10m
+                    source:
+                      type: Inline
+                      spec:
+                        script: asddasd
+                    environmentVariables: []
+                    delegateSelectors: []
+                    approvalCriteria:
+                      type: KeyValues
+                      spec:
+                        matchAnyCondition: false
+                        conditions:
+                          - key: asd
+                            operator: equals
+                            value: asdad
+                    rejectionCriteria:
+                      type: KeyValues
+                      spec:
+                        matchAnyCondition: false
+                        conditions: []
+                    onDelegate: true
+                    outputVariables:
+                      - name: dasd
+                        type: String
+                        value: asa
+        tags: {}
