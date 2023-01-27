@@ -1,0 +1,5 @@
+service:
+  name: "newServiceName"
+  identifier: "newServiceImportTest"
+  description: "servicedesc"
+  tags: {}
