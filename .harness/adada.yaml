@@ -1,0 +1,5 @@
+service:
+  name: "newServiceName"
+  identifier: "newServiceProject"
+  description: "servicedesc"
+  tags: {}
