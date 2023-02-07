@@ -1,0 +1,46 @@
+template:
+  name: localRemoteTempProj
+  identifier: localRemoteTempProj
+  versionLabel: "1"
+  type: Stage
+  projectIdentifier: rajTest
+  orgIdentifier: default
+  tags: {}
+  spec:
+    type: Approval
+    spec:
+      execution:
+        steps:
+          - step:
+              type: CustomApproval
+              name: adasdasd
+              identifier: adasdasd
+              timeout: 1d
+              spec:
+                shell: Bash
+                retryInterval: 10s
+                scriptTimeout: 10m
+                source:
+                  type: Inline
+                  spec:
+                    script: echo "Word"
+                environmentVariables: []
+                delegateSelectors: []
+                approvalCriteria:
+                  type: KeyValues
+                  spec:
+                    matchAnyCondition: false
+                    conditions:
+                      - key: adasd
+                        operator: equals
+                        value: adasd
+                rejectionCriteria:
+                  type: KeyValues
+                  spec:
+                    matchAnyCondition: false
+                    conditions: []
+                onDelegate: true
+                outputVariables:
+                  - name: dasd
+                    type: String
+                    value: adsasd
