@@ -1,0 +1,44 @@
+template:
+  name: dfsdfsdf
+  identifier: dfsdfsdf
+  versionLabel: "1"
+  type: Stage
+  tags: {}
+  spec:
+    type: Approval
+    spec:
+      execution:
+        steps:
+          - step:
+              type: CustomApproval
+              name: asfsdfsdf
+              identifier: asfsdfsdf
+              timeout: 1d
+              spec:
+                shell: Bash
+                retryInterval: 10s
+                scriptTimeout: 10m
+                source:
+                  type: Inline
+                  spec:
+                    script: echo "hi"
+                environmentVariables: []
+                delegateSelectors: []
+                approvalCriteria:
+                  type: KeyValues
+                  spec:
+                    matchAnyCondition: false
+                    conditions:
+                      - key: adasd
+                        operator: equals
+                        value: adasd
+                rejectionCriteria:
+                  type: KeyValues
+                  spec:
+                    matchAnyCondition: false
+                    conditions: []
+                onDelegate: true
+                outputVariables:
+                  - name: asdsa
+                    type: String
+                    value: adsasd
