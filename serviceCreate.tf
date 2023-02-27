@@ -14,9 +14,8 @@ resource "harness_platform_service" "this" {
   project_id  = "rajTest"
   yaml        = <<-EOT
     service:
-      name: gitxDemo
-      identifier: gitxDemo
-      description: "gitxDemo Description"
+      name: DemoGitX
+      identifier: DemoGitX
       tags: {}
       serviceDefinition:
         spec:
