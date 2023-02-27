@@ -12,12 +12,12 @@ resource "harness_platform_service" "this" {
   name        = "DemoGitXV2ServiceFeb27"
   org_id      = "default"
   project_id  = "rajTest"
-  description = "Adding description"
+  description = "Updating service description"
   yaml        = <<-EOT
     service:
       name: DemoGitXV2ServiceFeb27
       identifier: DemoGitXV2ServiceFeb27
-      description: "Adding description"
+      description: "Updating service description"
       tags: {}
       serviceDefinition:
         spec:
