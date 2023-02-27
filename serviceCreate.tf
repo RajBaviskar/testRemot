@@ -12,12 +12,10 @@ resource "harness_platform_service" "this" {
   name        = "DemoGitX"
   org_id      = "default"
   project_id  = "rajTest"
-  description = "gitxDemo Description"
   yaml        = <<-EOT
     service:
       name: DemoGitX
       identifier: DemoGitX
-      description: "gitxDemo Description"
       tags: {}
       serviceDefinition:
         spec:
