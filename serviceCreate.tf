@@ -8,11 +8,10 @@ terraform {
 }
 
 resource "harness_platform_service" "this" {
-  identifier  = "gitxDemo"
-  name        = "gitxDemo"
+  identifier  = "DemoGitX"
+  name        = "DemoGitX"
   org_id      = "default"
   project_id  = "rajTest"
-  description = "gitxDemo Description"
   yaml        = <<-EOT
     service:
       name: gitxDemo
