@@ -8,15 +8,15 @@ terraform {
 }
 
 resource "harness_platform_service" "this" {
-  identifier  = "DemoGitXV2Service"
-  name        = "DemoGitXV2Service"
+  identifier  = "DemoGitXV2ServiceFeb27"
+  name        = "DemoGitXV2ServiceFeb27"
   org_id      = "default"
   project_id  = "rajTest"
   description = "Adding description"
   yaml        = <<-EOT
     service:
-      name: DemoGitXV2Service
-      identifier: DemoGitXV2Service
+      name: DemoGitXV2ServiceFeb27
+      identifier: DemoGitXV2ServiceFeb27
       description: "Adding description"
       tags: {}
       serviceDefinition:
