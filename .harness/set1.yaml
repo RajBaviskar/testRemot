@@ -1,0 +1,22 @@
+inputSet:
+  name: set1
+  identifier: set1
+  orgIdentifier: TestAccResourceUserGroup_DeleteUnderlyingResource_TUeoH
+  projectIdentifier: TestAccResourceUserGroup_DeleteUnderlyingResource_TUeoH
+  pipeline:
+    identifier: test1_mar2
+    stages:
+      - stage:
+          identifier: S23
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: ShellScript_1
+                    type: ShellScript
+                    spec:
+                      source:
+                        type: Inline
+                        spec:
+                          script: echo 'hi'
