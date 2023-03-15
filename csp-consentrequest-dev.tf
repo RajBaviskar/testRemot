@@ -20,11 +20,8 @@ resource "harness_platform_environment" "ng_dev" {
   project_id = "rajTest"
   #tags       = ["foo:bar", "baz"]  --- Giving user permissions using tags
   type       = "PreProduction"
-
-
-
   yaml = <<-EOT
-               environment:
+  environment:
          name: csp_generalonboaringpipeline1_dev
          identifier: csp_generalonboaringpipeline1_dev
          orgIdentifier: default
