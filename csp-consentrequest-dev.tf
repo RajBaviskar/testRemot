@@ -31,7 +31,7 @@ resource "harness_platform_environment" "ng_dev" {
            - name: envVar1
              type: String
              value: v1
-             description: "test"
+             description: ""
            - name: envVar2
              type: String
              value: v2
@@ -45,12 +45,11 @@ resource "harness_platform_environment" "ng_dev" {
                    store:
                      type: Github
                      spec:
-                       connectorRef: account.ngcdharnessgithub
+                       connectorRef: account.NGTerraformGitDriven
                        gitFetchType: Branch
                        paths:
-                         - csp-consentrequest/deployment/
-                       repoName: csp-consentrequest
-                       branch: master
+                         - .
+                       branch: main
            configFiles:
              - configFile:
                  identifier: configFile1
@@ -60,6 +59,5 @@ resource "harness_platform_environment" "ng_dev" {
                      spec:
                        files:
                          - account:/Add-ons/svcOverrideTest
-                       secretFiles: []
       EOT
 }
