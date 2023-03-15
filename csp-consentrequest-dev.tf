@@ -40,7 +40,7 @@ resource "harness_platform_environment" "ng_dev" {
            manifests:
              - manifest:
                  identifier: deployment
-                 type: K8sManifest
+                 type: Values
                  spec:
                    store:
                      type: Github
