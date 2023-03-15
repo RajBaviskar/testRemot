@@ -12,7 +12,7 @@ resource "harness_platform_service" "ng" {
   name        = "csp_generalonboaringpipeline1"
   description = "Creating service for testing csp-generalonboaringpipeline"
   org_id      = "default"
-  project_id  = "Generalonboaringpipeline"
+  project_id  = "rajTest"
 
 
   yaml = <<-EOT
@@ -57,6 +57,6 @@ resource "harness_platform_service" "ng" {
               EOT
 }
 provider "harness" {
-  endpoint         = "https://harness-ng.paloaltonetworks.com"
-  #endpoint         ="https://app.harness.io/gateway"
+  #endpoint         = "https://harness-ng.paloaltonetworks.com"
+  endpoint         ="https://app.harness.io/gateway"
 }
