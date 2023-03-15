@@ -38,17 +38,17 @@ resource "harness_platform_environment" "ng_dev" {
          overrides:
            manifests:
             - manifest:
-                identifier: name
+                identifier: ManifestName
                 type: Values
                 spec:
-                  store:
-                    type: Github
-                    spec:
-                      connectorRef: account.NGTerraformGitDriven
-                      gitFetchType: Branch
-                      paths:
-                        - .
-                      branch: main
+                    store:
+                        type: Github
+                        spec:
+                            connectorRef: account.NGTerraformGitDriven
+                            gitFetchType: Branch
+                            paths:
+                                - .
+                            branch: main
            configFiles:
              - configFile:
                  identifier: configFile1
