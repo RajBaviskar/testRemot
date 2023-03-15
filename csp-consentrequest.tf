@@ -12,7 +12,7 @@ resource "harness_platform_service" "ng" {
   name        = "csp_generalonboaringpipeline1"
   description = "Creating service for testing csp-generalonboaringpipeline"
   org_id      = "default"
-  project_id  = "Generalonboaringpipeline"
+  project_id  = "rajTest"
 
 
   yaml = <<-EOT
