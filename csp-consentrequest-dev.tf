@@ -2,7 +2,7 @@ resource "harness_platform_environment" "ng_dev" {
   identifier = "csp_generalonboaringpipeline1_dev"
   name       = "csp_generalonboaringpipeline1_dev"
   org_id     = "default"
-  project_id = "Generalonboaringpipeline"
+  project_id = "rajTest"
   #tags       = ["foo:bar", "baz"]  --- Giving user permissions using tags
   type       = "PreProduction"
 
@@ -13,7 +13,7 @@ resource "harness_platform_environment" "ng_dev" {
          name: csp_generalonboaringpipeline1_dev
          identifier: csp_generalonboaringpipeline1_dev
          orgIdentifier: default
-         projectIdentifier: Generalonboaringpipeline
+         projectIdentifier: rajTest
          type: PreProduction
          variables:
            - name: envVar1
@@ -33,10 +33,10 @@ resource "harness_platform_environment" "ng_dev" {
                    store:
                      type: Github
                      spec:
-                       connectorRef: account.ngcdharnessgithub
+                       connectorRef: account.rajAccountLevel
                        gitFetchType: Branch
                        paths:
-                         - csp-consentrequest/deployment/
+                         - /demo
                        repoName: csp-consentrequest
                        branch: master
            configFiles:
