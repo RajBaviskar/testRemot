@@ -1,0 +1,31 @@
+pipeline:
+  name: k8s-rollout
+  identifier: k8sRollout
+  description: Pipeline generated from a First Gen Workflow - k8s-rollout
+  stages:
+    - stage:
+        identifier: k8sRollout
+        name: k8s-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: <+input>
+                serviceInputs: <+input>
+              environment:
+                environmentRef: <+input>
+                infrastructureDefinitions: <+input>
+                environmentInputs: <+input>
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: <+input>
+                default: default
+            when:
+              condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  allowStageExecutions: true

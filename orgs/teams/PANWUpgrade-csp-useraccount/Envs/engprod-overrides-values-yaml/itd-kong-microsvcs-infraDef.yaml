@@ -1,0 +1,8 @@
+infrastructureDefinition:
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: account.itdKong
+    namespace: <+stage.variables.Namespace>
+    releaseName: <+service.name>
+  allowSimultaneousDeployments: false

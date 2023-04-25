@@ -1,0 +1,152 @@
+pipeline:
+  name: kong-csp-useraccount
+  identifier: kongCspUseraccount
+  description: ""
+  stages:
+    - stage:
+        identifier: k8sDevCanary
+        name: k8s-dev-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: devOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdKongMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-dev
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sDevRollout
+        name: k8s-dev-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: devOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdKongMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-dev
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval2
+        name: Approval 2
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval2
+                  name: Approval 2
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sQaCanary
+        name: k8s-qa-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsKongMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sQaRollout
+        name: k8s-qa-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsKongMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  allowStageExecutions: true

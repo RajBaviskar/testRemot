@@ -1,0 +1,46 @@
+service:
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - identifier: gcrIoItdMicrosvcs
+              type: Gcr
+              spec:
+                connectorRef: account.itdMsGcrSa
+                registryHostname: gcr.io
+                imagePath: itd-microsvcs/csp-useraccount
+                tag: <+input>
+            - identifier: gcrIoItsMicrosvcs
+              type: Gcr
+              spec:
+                connectorRef: account.itsMsGcrSa
+                registryHostname: gcr.io
+                imagePath: its-microsvcs/csp-useraccount
+                tag: <+input>
+      manifests:
+        - manifest:
+            identifier: k8s_0
+            type: HelmChart
+            spec:
+              store:
+                spec:
+                  connectorRef: account.badGcpOrgGitAccount
+                  gitFetchType: Branch
+                  branch: develop
+                  folderPath: deployment/csp-useraccount
+                  repoName: csp-user-account-service
+                type: Git
+              helmVersion: V3
+              skipResourceVersioning: false
+        - manifest:
+            identifier: k8s_1
+            type: Values
+            spec:
+              store:
+                spec:
+                  files:
+                    - /csp-useraccount/valuesoverrideValues.yaml
+                type: Harness

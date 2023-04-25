@@ -1,0 +1,68 @@
+pipeline:
+  name: il4-csp-useraccount
+  identifier: il4CspUseraccount
+  description: IL4 Dev and Stage Deployment in Commercial GCP
+  stages:
+    - stage:
+        identifier: k8sDevCanary
+        name: k8s-dev-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: il4qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsFedMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sStgRollout
+        name: k8s-stg-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: il4qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsFedMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  allowStageExecutions: true

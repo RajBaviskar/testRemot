@@ -1,0 +1,72 @@
+template:
+  identifier: k8sCanary
+  name: k8s-canary
+  description: ""
+  tags: {}
+  versionLabel: v1
+  type: Stage
+  spec:
+    type: Deployment
+    spec:
+      service:
+        serviceRef: <+input>
+        serviceInputs: <+input>
+      deploymentType: Kubernetes
+      gitOpsEnabled: false
+      environment:
+        environmentRef: <+input>
+        deployToAll: false
+        infrastructureDefinitions: <+input>
+        environmentInputs: <+input>
+        serviceOverrideInputs: <+input>
+      execution:
+        steps:
+          - stepGroup:
+              identifier: canaryVerify
+              name: Canary-Verify
+              steps:
+                - step:
+                    type: K8sCanaryDeploy
+                    identifier: canaryDeployment
+                    name: Canary Deployment
+                    timeout: 600s
+                    spec:
+                      instanceSelection:
+                        type: Count
+                        spec:
+                          count: "1"
+                      skipDryRun: false
+                      delegateSelectors: []
+          - stepGroup:
+              identifier: canaryWrapUp
+              name: Canary-Wrap Up
+              steps:
+                - step:
+                    type: K8sDelete
+                    identifier: delete
+                    name: Delete
+                    timeout: 10m
+                    spec:
+                      deleteResources:
+                        type: ResourceName
+                        spec:
+                          resourceNames:
+                            - ${k8s.canaryWorkload}
+                      delegateSelectors: []
+    failureStrategies:
+      - onFailure:
+          errors:
+            - AllErrors
+          action:
+            type: StageRollback
+    variables:
+      - name: Namespace
+        type: String
+        value: <+input>
+        required: true
+        default: default
+    when:
+      pipelineStatus: Success
+      condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade

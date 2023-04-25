@@ -1,0 +1,19 @@
+serviceOverrides:
+  environmentRef: qaOverridesValuesYaml
+  serviceRef: cspUseraccount
+  variables: []
+  manifests:
+    - manifest:
+        identifier: tatfU8ssbe9zxugoaia4w
+        type: Values
+        spec:
+          store:
+            spec:
+              connectorRef: account.badGcpOrgGitAccount
+              gitFetchType: Branch
+              branch: develop
+              paths:
+                - deployment/namespace-overrides/csp-useraccount-qa.yaml
+              repoName: csp-user-account-service
+            type: Git
+  configFiles: []

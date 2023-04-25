@@ -1,0 +1,19 @@
+serviceOverrides:
+  environmentRef: kongDevOverridesValuesYaml
+  serviceRef: cspUseraccount
+  variables: []
+  manifests:
+    - manifest:
+        identifier: _8uhbbcxgrfo26liqs7a5da
+        type: Values
+        spec:
+          store:
+            spec:
+              connectorRef: account.badGcpOrgGitAccount
+              gitFetchType: Branch
+              branch: feature/CSP-13459-move-user-account-to-kong
+              paths:
+                - deployment/namespace-overrides/kong-csp-useraccount-dev.yaml
+              repoName: csp-user-account-service
+            type: Git
+  configFiles: []

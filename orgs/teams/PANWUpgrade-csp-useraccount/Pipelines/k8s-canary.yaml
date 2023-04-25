@@ -1,0 +1,31 @@
+pipeline:
+  name: k8s-canary
+  identifier: k8sCanary
+  description: Pipeline generated from a First Gen Workflow - k8s-canary
+  stages:
+    - stage:
+        identifier: k8sCanary
+        name: k8s-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: <+input>
+                serviceInputs: <+input>
+              environment:
+                environmentRef: <+input>
+                infrastructureDefinitions: <+input>
+                environmentInputs: <+input>
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: <+input>
+                default: default
+            when:
+              condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  allowStageExecutions: true

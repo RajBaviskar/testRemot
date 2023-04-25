@@ -1,0 +1,285 @@
+trigger:
+  name: Artifact-Trigger
+  identifier: artifactTrigger
+  description: Deployment will be triggered on new Artifact push to GCR.
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  pipelineIdentifier: cspUseraccount
+  inputYaml: |
+    pipeline:
+      identifier: "cspUseraccount"
+      stages:
+      - stage:
+          identifier: "approval1"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval1"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sCanary1"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "k8sDevRollout"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "approval3"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval3"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sQaCanary"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "k8sQaRollout"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "approval4"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval4"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sEngprodCanary"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "k8sEngprodRollout"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "approval6"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval6"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sStgCanary"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "k8sStgRollout"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "approval7"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval7"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sCanary"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+      - stage:
+          identifier: "approval8"
+          type: "Approval"
+          spec:
+            execution:
+              steps:
+              - step:
+                  identifier: "approval8"
+                  type: "HarnessApproval"
+                  spec:
+                    approvers:
+                      userGroups: "<+input>"
+      - stage:
+          identifier: "k8sRollout"
+          template:
+            templateInputs:
+              type: "Deployment"
+              spec:
+                service:
+                  serviceInputs:
+                    serviceDefinition:
+                      type: "Kubernetes"
+                      spec:
+                        artifacts:
+                          primary:
+                            primaryArtifactRef: "<+input>"
+                            sources: "<+input>"
+                environment:
+                  serviceOverrideInputs: "<+input>"
+              when:
+                condition: "<+input>"
+  source:
+    type: Artifact
+    spec:
+      stageIdentifier: __PLEASE_FIX_ME__
+      artifactRef: __PLEASE_FIX_ME__
+      type: Gcr
+      spec:
+        connectorRef: account.itdMsGcrSa
+        registryHostname: gcr.io
+        imagePath: itd-microsvcs/csp-useraccount
+        tag: __PLEASE_FIX_ME__
+  enabled: false

@@ -1,0 +1,63 @@
+template:
+  identifier: k8sRollout
+  name: k8s-rollout
+  description: ""
+  tags: {}
+  versionLabel: v1
+  type: Stage
+  spec:
+    type: Deployment
+    spec:
+      service:
+        serviceRef: <+input>
+        serviceInputs: <+input>
+      deploymentType: Kubernetes
+      gitOpsEnabled: false
+      environment:
+        environmentRef: <+input>
+        deployToAll: false
+        infrastructureDefinitions: <+input>
+        environmentInputs: <+input>
+        serviceOverrideInputs: <+input>
+      execution:
+        steps:
+          - stepGroup:
+              identifier: deploy
+              name: Deploy
+              steps:
+                - step:
+                    type: K8sRollingDeploy
+                    identifier: rolloutDeployment
+                    name: Rollout Deployment
+                    timeout: 10m
+                    spec:
+                      skipDryRun: false
+        rollbackSteps:
+          - stepGroup:
+              identifier: deploy
+              name: Deploy
+              steps:
+                - step:
+                    type: K8sRollingRollback
+                    identifier: rollbackDeployment
+                    name: Rollback Deployment
+                    timeout: 10m
+                    spec:
+                      pruningEnabled: false
+    failureStrategies:
+      - onFailure:
+          errors:
+            - AllErrors
+          action:
+            type: StageRollback
+    variables:
+      - name: Namespace
+        type: String
+        value: <+input>
+        required: true
+        default: default
+    when:
+      pipelineStatus: Success
+      condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade

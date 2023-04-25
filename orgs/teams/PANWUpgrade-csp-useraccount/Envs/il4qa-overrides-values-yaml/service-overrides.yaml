@@ -1,0 +1,19 @@
+serviceOverrides:
+  environmentRef: il4qaOverridesValuesYaml
+  serviceRef: cspUseraccount
+  variables: []
+  manifests:
+    - manifest:
+        identifier: vfdeauj4rfcmfivreqpraw
+        type: Values
+        spec:
+          store:
+            spec:
+              connectorRef: account.badGcpOrgGitAccount
+              gitFetchType: Branch
+              branch: develop
+              paths:
+                - deployment/namespace-overrides/csp-useraccount-il4qa.yaml
+              repoName: csp-user-account-service
+            type: Git
+  configFiles: []

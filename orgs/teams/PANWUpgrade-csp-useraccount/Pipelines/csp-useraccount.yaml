@@ -1,0 +1,452 @@
+pipeline:
+  name: csp-useraccount
+  identifier: cspUseraccount
+  description: ""
+  stages:
+    - stage:
+        type: Approval
+        identifier: approval1
+        name: Approval 1
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval1
+                  name: Approval 1
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sCanary1
+        name: k8s-canary-1
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: devOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-dev
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sDevRollout
+        name: k8s-dev-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: devOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-dev
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval3
+        name: Approval 3
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval3
+                  name: Approval 3
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sQaCanary
+        name: k8s-qa-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sQaRollout
+        name: k8s-qa-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: qaOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-qa
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval4
+        name: Approval 4
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval4
+                  name: Approval 4
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sEngprodCanary
+        name: k8s-engprod-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: engprodOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-engprod
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sEngprodRollout
+        name: k8s-engprod-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: engprodOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itdMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-engprod
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval6
+        name: Approval 6
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval6
+                  name: Approval 6
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sStgCanary
+        name: k8s-stg-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: stgOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-stg
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        identifier: k8sStgRollout
+        name: k8s-stg-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: stgOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itsMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount-stg
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval7
+        name: Approval 7
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval7
+                  name: Approval 7
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sCanary
+        name: k8s-canary
+        template:
+          templateRef: k8sCanary
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: prodOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itpMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount
+                default: default
+            when:
+              condition: <+input>
+    - stage:
+        type: Approval
+        identifier: approval8
+        name: Approval 8
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  identifier: approval8
+                  name: Approval 8
+                  timeout: 86400s
+                  spec:
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups: <+input>
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+    - stage:
+        identifier: k8sRollout
+        name: k8s-rollout
+        template:
+          templateRef: k8sRollout
+          templateInputs:
+            type: Deployment
+            spec:
+              service:
+                serviceRef: cspUseraccount
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
+              environment:
+                environmentRef: prodOverridesValuesYaml
+                infrastructureDefinitions:
+                  - identifier: itpMicrosvcs
+                serviceOverrideInputs: <+input>
+            variables:
+              - name: Namespace
+                type: String
+                value: csp-useraccount
+                default: default
+            when:
+              condition: <+input>
+  orgIdentifier: default
+  projectIdentifier: PANWUpgrade
+  allowStageExecutions: true
