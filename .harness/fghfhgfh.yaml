@@ -1,0 +1,30 @@
+pipeline:
+  name: fghfhgfh
+  identifier: fghfhgfh
+  projectIdentifier: rajTest
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: fgh
+        identifier: fgh
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  timeout: 10m
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "Hello world"
+                    environmentVariables: []
+                    outputVariables: []
+        tags: {}
