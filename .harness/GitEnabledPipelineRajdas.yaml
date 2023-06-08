@@ -5,7 +5,7 @@ pipeline:
     projectIdentifier: rajTest
     orgIdentifier: default
     tags: {}
-    description : "hello"
+    description : "hello asd"
     stages:
         - stage:
             name: dep
