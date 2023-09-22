@@ -1,0 +1,5 @@
+# Chart.yaml
+apiVersion: v2
+name: my-docker-app
+description: A Helm chart for deploying a Docker container
+version: 0.1.0
