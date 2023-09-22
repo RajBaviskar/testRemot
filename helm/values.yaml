@@ -1,5 +1,5 @@
 # values.yaml
 image:
-  repository: my-docker-image
-  tag: latest
+  repository: harnessdev/rajtodoapp
+  tag: 1
 
