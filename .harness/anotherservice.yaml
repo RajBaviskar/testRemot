@@ -1,7 +1,0 @@
-service:
-  name: anotherService
-  identifier: anotherservice
-  gitOpsEnabled: false
-  serviceDefinition:
-    type: Elastigroup
-    spec: {}
