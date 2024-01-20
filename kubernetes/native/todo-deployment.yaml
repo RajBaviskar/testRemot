@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: harnessdev/rajtodoapp:1
+        image: harnessdev/rajtodoapp:4
         ports:
         - containerPort: 80
         resources:
