@@ -1,5 +1,5 @@
 # values.yaml
 image:
   repository: harnessdev/rajtodoapp
-  tag: 1
+  tag: 4
 
