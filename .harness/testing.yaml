@@ -1,0 +1,11 @@
+service:
+  name: testing
+  identifier: testing
+  gitOpsEnabled: false
+  serviceDefinition:
+    type: CustomDeployment
+    spec:
+      customDeploymentRef:
+        templateRef: customdeployer
+        versionLabel: v1
+      artifacts: {}
