@@ -1,0 +1,8 @@
+service:
+  name: asdasds
+  identifier: asdasds
+  orgIdentifier: default
+  projectIdentifier: rajMigratorTest2
+  serviceDefinition:
+    spec: {}
+    type: Kubernetes
