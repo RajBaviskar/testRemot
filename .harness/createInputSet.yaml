@@ -1,0 +1,16 @@
+inputSet:
+  name: createInputSet
+  identifier: createInputSet
+  orgIdentifier: default
+  projectIdentifier: rajTest
+  pipeline:
+    identifier: sadfsdf
+    stages:
+      - stage:
+          identifier: asdasd
+          type: Deployment
+          spec:
+            service:
+              serviceRef: gitSyncService
+            environment:
+              environmentRef: AWSEnv
