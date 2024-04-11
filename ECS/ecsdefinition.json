@@ -1,1 +1,22 @@
-
+{
+  "family": "my-webapp",
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "harnessdev/rajtodoapp:4",
+      "cpu": 256,
+      "memory": 512,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ],
+      "essential": true
+    }
+  ],
+  "networkMode": "bridge",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": ["EC2"]
+}
