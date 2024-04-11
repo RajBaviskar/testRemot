@@ -1,9 +1,9 @@
 {
   "serviceName": "my-webapp-service",
-  "taskDefinition": "my-webapp", // Reference to the task definition family
+  "taskDefinition": "my-webapp",
   "cluster": "my-cluster",
-  "desiredCount": 1, // Number of instances of the task to run
-  "launchType": "EC2", // Launch type for the service
+  "desiredCount": 1,
+  "launchType": "EC2",
   "deploymentConfiguration": {
     "maximumPercent": 200,
     "minimumHealthyPercent": 50
