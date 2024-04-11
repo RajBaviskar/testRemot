@@ -1,5 +1,5 @@
 {
-  "serviceName": "my-webapp-service",
+  "serviceName": "my-webapp-todoservice",
   "taskDefinition": "my-webapp",
   "cluster": "my-cluster",
   "desiredCount": 1,
