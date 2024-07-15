@@ -1,15 +1,14 @@
 resource "harness_platform_service" "this" {
   identifier   = "rajK8NativeTF2"
   name         = "rajK8NativeTF2"
-  org_id       = "default"
-  project_id   = "rajTest"
-  force_delete = "true"
+  org_id       = "Ng_Pipelines_K8s_Organisations"
+  project_id   = "DoNotDelete_Mayank"
   yaml         = <<-EOH
 service:
   name: rajK8NativeTF2
   identifier: rajK8NativeTF2
-  orgIdentifier: default
-  projectIdentifier: rajTest
+  orgIdentifier: Ng_Pipelines_K8s_Organisations
+  projectIdentifier: DoNotDelete_Mayank
   serviceDefinition:
     spec:
       manifests:
