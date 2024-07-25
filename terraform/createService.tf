@@ -41,3 +41,7 @@ service:
     type: Kubernetes
   EOH
 }
+
+output "out" {
+  value = harness_platform_service.this.id
+}
