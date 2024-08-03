@@ -11,33 +11,6 @@ resource "harness_platform_pipeline" "example" {
     projectIdentifier: rajTest
     stages:
       - stage:
-          identifier: Manifest_Download_and_Parse
-          name: Manifest Download and Parse
-          template:
-            templateRef: DeployStageTemplate
-            versionLabel: v1
-            templateInputs:
-              type: Deployment
-              spec:
-                environment:
-                  environmentRef: <+input>
-                  environmentInputs: <+input>
-                  serviceOverrideInputs: <+input>
-                  infrastructureDefinitions: <+input>
-                service:
-                  serviceRef: <+input>
-                  serviceInputs: <+input>
-              variables:
-                - name: changeReleaseTicket
-                  type: String
-                  value: <+input>.regex(^CHG\d{8}$|^$)
-      - stage:
-          identifier: Slack_Notify_on_Start
-          name: Slack Notify on Start
-          template:
-            templateRef: Slack_Notify_on_Start
-            versionLabel: v1alpha1
-      - stage:
           description: ""
           identifier: awn_dev_389878225939_us_west_2_infra_analyzers_v1_26_0
           name: awn-dev-389878225939
@@ -36384,13 +36357,6 @@ resource "harness_platform_pipeline" "example" {
           when:
             condition: "\"awn-prod-vxintel-654654561931-us-west-2-infra-vxintel-dce8ffaea6\" =~ <+pipeline.stages.Manifest_Download_and_Parse.variables.MatchExpression>"
             pipelineStatus: Success
-      - stage:
-          identifier: Slack_Notify_on_End
-          name: Slack Notify on End
-          template:
-            gitBranch: main
-            templateRef: Slack_Notify_on_Start
-            versionLabel: v1alpha1
     tags: {}
   EOT
 }
