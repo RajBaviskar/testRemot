@@ -1,12 +1,12 @@
 resource "harness_platform_pipeline" "original" {
-  identifier = "VeryBigPipelineTestnewfromCLI"
+  identifier = "VeryBigPipelineTestnewfromCLItest2"
   org_id     = "default"
   project_id = "rajTest"
-  name       = "VeryBigPipelineTestnewfromCLI"
+  name       = "VeryBigPipelineTestnewfromCLItest2"
   yaml = <<-EOT
 pipeline:
-  identifier: VeryBigPipelineTestnewfromCLI
-  name: VeryBigPipelineTestnewfromCLI
+  identifier: VeryBigPipelineTestnewfromCLItest2
+  name: VeryBigPipelineTestnewfromCLItest2
   orgIdentifier: default
   projectIdentifier: rajTest
   stages:
