@@ -1,13 +1,10 @@
 terraform {
-  required_providers {
-    harness = {
-      source  = "harness/harness"
-    }
-  }
-  # required_version = "1.3.9"
+  source = "../../modules/harness_service"
 }
 
-provider "harness" {
+inputs = {
+  harness_org_id     = "default"
+  harness_project_id = "rajTest"
   endpoint         = "https://app.harness.io/gateway"
   account_id       = "UKh5Yts7THSMAbccG3HrLA"
   platform_api_key = ""
