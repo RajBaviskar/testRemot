@@ -11,11 +11,10 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_instance" "example" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+resource "aws_vpc" "main" {
+  cidr_block = var.cidr_block
 
   tags = {
-    Name = var.instance_name
+    Name = var.vpc_name
   }
 }
