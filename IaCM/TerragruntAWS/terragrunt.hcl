@@ -1,7 +1,7 @@
 # Define local variables (if needed)
-locals {
-  environments = ["dev", "staging", "prod"]
-}
+# locals {
+#   environments = ["dev", "staging", "prod"]
+# }
 
 # Include configurations for environments and modules
 # This will include the terragrunt.hcl configurations of individual environments
@@ -21,11 +21,11 @@ locals {
 # This will enable running `terragrunt run-all init` from the root folder
 
 # Include VPC submodule for dev environment
-include "vpc" {
-  path = "./environments/dev/vpc/terragrunt.hcl"
-}
+# include "vpc" {
+#   path = "./environments/dev/vpc/terragrunt.hcl"
+# }
 
 # Include EC2 submodule for dev environment
-include "ec2" {
-  path = "./environments/dev/ec2/terragrunt.hcl"
-}
+# include "ec2" {
+#   path = "./environments/dev/ec2/terragrunt.hcl"
+# }

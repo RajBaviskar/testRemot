@@ -1,5 +1,5 @@
 terraform {
-  source = "file:///Users/rajendrabaviskar/testRemot/IaCM/TerragruntAWS/modules/vpc"
+  source = "${get_repo_root()}/IaCM/TerragruntAWS/modules/vpc"
 }
 
 inputs = {

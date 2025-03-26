@@ -1,13 +1,11 @@
-
 terraform {
-  source =  "${get_repo_root()}/IaCM/TerragruntAWS/modules/ec2"
+  source = "${get_repo_root()}/IaCM/TerragruntAWS/modules/vpc"
 }
 
 inputs = {
-  ami_id         = "ami-05b10e08d247fb927"
-  instance_type  = "t2.micro"
-  instance_name  = "raj-prod-instance"
   aws_region    = "us-east-1"  # Set your desired AWS region here
+  cidr_block    = "10.0.0.0/16"
+  vpc_name      = "raj-prod-vpc"
 }
 
 remote_state {
@@ -19,7 +17,7 @@ remote_state {
 
   config = {
     bucket         = "raj-tg"
-    key            = "${path_relative_to_include()}/ec2/terraform.tfstate"
+    key            = "${path_relative_to_include()}/vpc/terraform.tfstate"
     region         = "us-east-1"  # Change to your AWS region
     encrypt        = true
   }
