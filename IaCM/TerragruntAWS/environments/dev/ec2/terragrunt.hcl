@@ -1,6 +1,6 @@
 
 terraform {
-  source =  "${get_repo_root()}/IaCM/TerragruntAWS/modules/ec2"
+  source =  "../../../modules/ec2"
 }
 
 inputs = {
