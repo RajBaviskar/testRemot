@@ -1,26 +1,16 @@
+# Include all settings from the root configuration file
+include {
+  path = find_in_parent_folders("root.hcl")
+}
 
+# Specify the terraform configuration source
 terraform {
-  source =  "../../../modules/ec2"
+  source = "../../../modules/ec2"
 }
 
+# Override only the specific inputs that are different for this environment
 inputs = {
-  ami_id         = "ami-05b10e08d247fb927"
-  instance_type  = "t2.micro"
-  instance_name  = "raj-prod-instance"
-  aws_region    = "us-east-1"  # Set your desired AWS region here
-}
-
-remote_state {
-  backend = "s3"
-  generate = {
-    path      = "backend.tf"
-    if_exists = "overwrite"
-  }
-
-  config = {
-    bucket         = "raj-tg"
-    key            = "${path_relative_to_include()}/ec2/terraform.tfstate"
-    region         = "us-east-1"  # Change to your AWS region
-    encrypt        = true
-  }
+  ami_id        = "ami-05b10e08d247fb927"
+  instance_name = "raj-prod-instance"
+  # Note: instance_type and aws_region are inherited from root configuration
 }
