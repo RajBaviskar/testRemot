@@ -19,7 +19,7 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket          = "rajtgaws-new1"
+    bucket          = "rajtgaws-new2"
     key             = "${path_relative_to_include()}/terraform.tfstate"
     region          = "us-east-1"
     encrypt         = true
