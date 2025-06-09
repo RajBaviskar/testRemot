@@ -6,8 +6,6 @@ terraform {
       version = "~> 2.4.0"
     }
   }
-}
-
 backend "s3" {
     bucket = "rajtfbasic-local1"  # Your S3 bucket
     key    = "SimpleTF/terraform.tfstate"
@@ -16,6 +14,9 @@ backend "s3" {
     # Optional: Add DynamoDB table for state locking
     dynamodb_table = "terraform-locks"
 }
+}
+
+
 
 resource "local_file" "example" {
   content  = "Hello from Terraform!"
