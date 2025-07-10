@@ -29,15 +29,16 @@ EOF
 # Root level configuration
 terraform {
   source = "./modules//hello-world-module"
+  
+  # Add extra arguments for init
+  extra_arguments "init_reconfigure" {
+    commands = ["init"]
+    arguments = ["-reconfigure"]
+  }
 }
 
 # Root level inputs
 inputs = {
   environment = "root"
   module_name = local.module_name
-}
-
-extra_arguments "init_reconfigure" {
-  commands  = ["init"]
-  arguments = ["-reconfigure"]
 }
