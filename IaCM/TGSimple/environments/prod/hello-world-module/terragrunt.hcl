@@ -1,0 +1,13 @@
+include {
+  path = find_in_parent_folders()
+}
+
+terraform {
+  source = "../../../modules//hello-world-module"
+}
+
+# Environment and module-specific variables
+inputs = {
+  environment = "Production Environment"
+  module_name = "hello-world-module"
+}

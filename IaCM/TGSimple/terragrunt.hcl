@@ -1,5 +1,7 @@
-# Skip root level execution
-skip = true
+# Define common variables
+locals {
+  module_name = "hello-world-module"
+}
 
 # Configure Terragrunt to automatically store tfstate files in a root-relative location
 remote_state {
@@ -22,4 +24,15 @@ terraform {
   required_version = ">= 0.12"
 }
 EOF
+}
+
+# Root level configuration
+terraform {
+  source = "./modules//hello-world-module"
+}
+
+# Root level inputs
+inputs = {
+  environment = "root"
+  module_name = local.module_name
 }

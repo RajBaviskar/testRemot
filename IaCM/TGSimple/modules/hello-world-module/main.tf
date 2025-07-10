@@ -3,6 +3,12 @@ variable "environment" {
   type        = string
 }
 
+variable "module_name" {
+  description = "Name of the module"
+  type        = string
+  default     = "hello-world-module"
+}
+
 output "message" {
-  value = "Hello, World from Terragrunt ${var.environment}!"
+  value = "Hello, World from ${var.module_name} in ${var.environment}!"
 }
