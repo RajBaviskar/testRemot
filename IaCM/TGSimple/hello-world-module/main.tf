@@ -1,4 +1,8 @@
-# hello-world-module/main.tf
+variable "environment" {
+  description = "Environment name (qa/prod)"
+  type        = string
+}
+
 output "message" {
-  value = "Hello, World from Terraform!"
+  value = "Hello, World from Terragrunt ${var.environment}!"
 }
