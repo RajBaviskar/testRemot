@@ -1,5 +1,5 @@
 terraform {
-  source = "../hello-world-module"
+  source = "../modules//hello-world-module"
 }
 
 include {

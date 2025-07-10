@@ -1,8 +1,11 @@
+# Skip root level execution
+skip = true
+
 # Configure Terragrunt to automatically store tfstate files in a root-relative location
 remote_state {
   backend = "local"
   config = {
-    path = "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/terraform.tfstate"
+    path = "${path_relative_to_include()}/terraform.tfstate"
   }
   generate = {
     path      = "backend.tf"
