@@ -19,6 +19,9 @@ crash.log
 
 # Ignore environment-specific override files
 terraform.tfvars
+
+# Ignore AiAgents directory
+AiAgents/
 *.auto.tfvars
 *.auto.tfvars.json
 *.tfvars.json
