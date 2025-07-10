@@ -1,3 +1,8 @@
+# Empty backend block for Terragrunt to configure
+terraform {
+  backend "local" {}
+}
+
 variable "environment" {
   description = "Environment name (qa/prod)"
   type        = string
