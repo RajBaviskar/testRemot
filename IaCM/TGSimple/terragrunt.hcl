@@ -36,3 +36,8 @@ inputs = {
   environment = "root"
   module_name = local.module_name
 }
+
+extra_arguments "init_reconfigure" {
+  commands  = ["init"]
+  arguments = ["-reconfigure"]
+}
