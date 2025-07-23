@@ -1,26 +1,17 @@
-include {
+include "root" {
   path = find_in_parent_folders()
 }
 
-generate "provider" {
-  path      = "provider.tf"
-  if_exists = "overwrite_terragrunt"
-  contents  = <<EOF
-provider "harness" {
-  alias             = "prod"
-  endpoint          = "https://app.harness.io/gateway"
-  account_id        = "UKh5Yts7THSMAbccG3HrLA"
-  platform_api_key  = ""
+terraform {
+  source = "."
 }
-EOF
-}
+
 
 generate "main" {
   path      = "main.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 resource "harness_platform_service" "prod" {
-  provider     = harness.prod
   identifier   = "rajK8NativeTF2prod"
   name         = "rajK8NativeTF2prod"
   org_id       = "default"
