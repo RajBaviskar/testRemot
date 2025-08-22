@@ -1,12 +1,24 @@
-# Root configuration file
+locals {
+  global_vars = read_terragrunt_config("variables.hcl")
+}
 
 # Generate AWS provider configuration
 generate "provider" {
   path      = "provider.tf"
   if_exists = "overwrite"
   contents  = <<EOF
+variable "aws_region" {
+  description = "AWS region to deploy resources"
+  type        = string
+  default     = "us-east-1"
+}
+
 provider "aws" {
   region = var.aws_region
+}
+
+terraform {
+  required_version = ">= 1.0.0"
 }
 EOF
 }
@@ -19,7 +31,7 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket          = "rajtgaws-new5"
+    bucket          = "rajtgaws-new4"
     key             = "${path_relative_to_include()}/terraform.tfstate"
     region          = "us-east-1"
     encrypt         = true
