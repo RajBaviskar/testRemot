@@ -1,7 +1,8 @@
-locals {
-  vpc_cidr      = "10.0.0.0/16"
-  instance_type = "t2.micro"
+# Current (incorrect for -var-file)
+inputs = {
+  env_owner = "prod-team"
   tags = {
-    region = "us-east-1"
+    environment = "prod"
+    owner       = "prod-team-raj-2"
   }
 }
