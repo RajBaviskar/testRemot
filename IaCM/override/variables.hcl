@@ -2,6 +2,6 @@ locals {
   env_owner = "prod-team"
   tags = {
     environment = "prod"
-    owner       = "prod-team-raj-1"
+    owner       = "prod-team-raj-2"
   }
 }
