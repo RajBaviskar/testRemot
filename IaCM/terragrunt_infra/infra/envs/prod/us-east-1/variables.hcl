@@ -4,3 +4,4 @@ locals {
   tags = {
     region = "us-east-1"
   }
+}
