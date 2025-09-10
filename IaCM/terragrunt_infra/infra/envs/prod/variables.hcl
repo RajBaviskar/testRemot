@@ -1,4 +1,5 @@
-locals {
+# In your terragrunt.hcl files
+inputs = {
   env_owner = "prod-team"
   tags = {
     environment = "prod"
