@@ -8,5 +8,8 @@ terraform {
 }
 
 inputs = {
-  bucket_name = "raj-tgoverride-prod-s3-bucket-20250918"
+  environment = "production"
+  owner       = "prod-team"
+  project     = "enterprise-app"
+  bucket_name = "raj-prod-bucket-default"
 }

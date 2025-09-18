@@ -43,5 +43,8 @@ remote_state {
 
 # Common inputs for all modules - these will be passed as TF variables
 inputs = {
-  # These values can be overridden via CLI: terragrunt plan -var="owner=custom-owner"
+  # Default values that can be overridden via CLI: terragrunt plan -var="owner=custom-owner"
+  owner       = local.common_vars.owner
+  environment = local.common_vars.environment
+  project     = local.common_vars.project
 }

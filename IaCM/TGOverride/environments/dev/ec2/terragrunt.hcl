@@ -8,5 +8,9 @@ terraform {
 }
 
 inputs = {
+  environment   = "development"
+  owner         = "dev-team"
+  project       = "simple-tg"
   instance_type = "t2.micro"
+  bucket_name   = "raj-dev-bucket-default"
 }

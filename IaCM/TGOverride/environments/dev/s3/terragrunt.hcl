@@ -8,5 +8,8 @@ terraform {
 }
 
 inputs = {
-  bucket_name = "raj-tgoverride-dev-s3-bucket-20250918"
+  environment = "development"
+  owner       = "dev-team"
+  project     = "simple-tg"
+  bucket_name = "raj-dev-bucket-default"
 }
