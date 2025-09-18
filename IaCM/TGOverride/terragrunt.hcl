@@ -29,11 +29,15 @@ terraform {
 EOF
 }
 
-# Local state backend
+# S3 remote state backend
 remote_state {
-  backend = "local"
+  backend = "s3"
   config = {
-    path = "states/${path_relative_to_include()}/terraform.tfstate"
+    bucket         = "rajtgoverrides3bucket"
+    key            = "${path_relative_to_include()}/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
   }
   generate = {
     path      = "backend.tf"
