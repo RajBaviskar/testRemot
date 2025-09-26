@@ -33,7 +33,7 @@ EOF
 remote_state {
   backend = "s3"
   config = {
-    bucket  = "rajtgoverrides5bucket"
+    bucket  = "rajtgoverrides6bucket"
     key     = "${path_relative_to_include()}/terraform.tfstate"
     region  = "us-east-1"
     encrypt = true
