@@ -11,5 +11,5 @@ inputs = {
   environment = "development"
   owner       = "dev-team"
   project     = "simple-tg"
-  bucket_name = "raj-dev-bucket-default"
+  bucket_name = "raj-dev-bucket-unique-dev"
 }

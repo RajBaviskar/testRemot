@@ -11,5 +11,5 @@ inputs = {
   environment = "production"
   owner       = "prod-team"
   project     = "enterprise-app"
-  bucket_name = "raj-prod-bucket-default"
+  bucket_name = "raj-prod-bucket-unique-prod"
 }
