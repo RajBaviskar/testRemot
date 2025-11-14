@@ -29,7 +29,7 @@ remote_state {
 # Common inputs that apply to all environments
 inputs = {
   aws_region     = "us-east-1"
-  instance_type  = "t2.micro"  # Default instance type
+  instance_type  = "t2.large"  # Default instance type
 }
 
 # Common terraform configuration
