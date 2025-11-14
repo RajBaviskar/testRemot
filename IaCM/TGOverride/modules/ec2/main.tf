@@ -48,6 +48,16 @@ variable "region" {
 }
 variable "vpc_id" { default = "" }
 variable "use_default_vpc" { default = false }
+variable "ebs_volume_size" {
+  description = "Size of EBS volume in GB"
+  type        = number
+  default     = 100
+}
+variable "ebs_volume_type" {
+  description = "Type of EBS volume"
+  type        = string
+  default     = "gp3"
+}
 
 locals {
   common_tags = {
@@ -86,6 +96,23 @@ resource "aws_instance" "main" {
   })
 }
 
+# Additional EBS volume for increased storage and cost
+resource "aws_ebs_volume" "additional" {
+  availability_zone = aws_instance.main.availability_zone
+  size              = var.ebs_volume_size
+  type              = var.ebs_volume_type
+
+  tags = merge(local.common_tags, {
+    Name = "${local.instance_name}-data"
+  })
+}
+
+resource "aws_volume_attachment" "additional" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.additional.id
+  instance_id = aws_instance.main.id
+}
+
 output "instance_id" {
   description = "ID of the EC2 instance"
   value       = aws_instance.main.id
@@ -99,4 +126,14 @@ output "instance_public_ip" {
 output "instance_tags" {
   description = "Tags applied to the EC2 instance"
   value       = aws_instance.main.tags
+}
+
+output "ebs_volume_id" {
+  description = "ID of the additional EBS volume"
+  value       = aws_ebs_volume.additional.id
+}
+
+output "ebs_volume_size" {
+  description = "Size of the additional EBS volume"
+  value       = aws_ebs_volume.additional.size
 }
