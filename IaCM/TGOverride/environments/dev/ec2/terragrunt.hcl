@@ -11,6 +11,6 @@ inputs = {
   environment   = "development"
   owner         = "dev-team"
   project       = "simple-tg"
-  instance_type = "t2.large"
+  instance_type = "t2.small"
   bucket_name   = "raj-dev-bucket-default"
 }
