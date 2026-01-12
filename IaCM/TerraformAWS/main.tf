@@ -15,3 +15,8 @@ resource "aws_s3_bucket" "example" {
     Name = "example-bucket"
   }
 }
+
+# S3 Bucket for import
+resource "aws_s3_bucket" "testexample" {
+  bucket = "raj-test-import"
+}
