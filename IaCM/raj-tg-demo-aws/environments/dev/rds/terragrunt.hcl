@@ -49,16 +49,15 @@ inputs = {
   # Use random password generation
   manage_master_user_password = true
   
-  # VPC and networking (using default VPC for simplicity)
+  # Keep networking simple - no custom configurations
   create_db_subnet_group = false
-  vpc_security_group_ids = [] # Will use default security group
   
   # Backup and maintenance
   backup_retention_period = 1
   backup_window          = "03:00-04:00"
   maintenance_window     = "Mon:04:00-Mon:05:00"
   
-  # Disable deletion protection for demo
+  # Dev settings
   deletion_protection = false
   skip_final_snapshot = true
   

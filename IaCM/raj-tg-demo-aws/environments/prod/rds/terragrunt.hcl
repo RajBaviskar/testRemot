@@ -49,9 +49,8 @@ inputs = {
   # Use random password generation
   manage_master_user_password = true
   
-  # VPC and networking (using default VPC for simplicity)
+  # VPC and networking - keep it simple, no custom subnet groups
   create_db_subnet_group = false
-  vpc_security_group_ids = [] # Will use default security group
   
   # Backup and maintenance (more robust for prod)
   backup_retention_period = 7
