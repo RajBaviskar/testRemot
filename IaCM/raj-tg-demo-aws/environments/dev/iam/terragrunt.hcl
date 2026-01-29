@@ -2,6 +2,17 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
+# Generate backend configuration for external module
+generate "backend" {
+  path      = "backend.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+terraform {
+  backend "s3" {}
+}
+EOF
+}
+
 terraform {
   source = "tfr:///terraform-aws-modules/iam/aws//modules/iam-user?version=5.34.0"
 }
