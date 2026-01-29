@@ -13,6 +13,17 @@ terraform {
 EOF
 }
 
+# Generate provider configuration for external module
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+provider "aws" {
+  region = "us-east-1"
+}
+EOF
+}
+
 terraform {
   source = "tfr:///terraform-aws-modules/rds/aws?version=6.1.1"
 }
