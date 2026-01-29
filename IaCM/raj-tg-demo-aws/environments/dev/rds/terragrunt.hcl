@@ -50,8 +50,7 @@ inputs = {
   manage_master_user_password = true
   
   # VPC and networking (using default VPC for simplicity)
-  create_db_subnet_group = true
-  subnet_ids             = [] # Will use default VPC subnets
+  create_db_subnet_group = false
   vpc_security_group_ids = [] # Will use default security group
   
   # Backup and maintenance
