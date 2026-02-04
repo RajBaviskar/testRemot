@@ -7,6 +7,6 @@ terraform {
 }
 
 inputs = {
-  bucket_name = "raj-prod-wrapper-module-${get_aws_account_id()}"
+  bucket_name = "raj-prod-wrapper-module-12345"
   environment = "prod"
 }

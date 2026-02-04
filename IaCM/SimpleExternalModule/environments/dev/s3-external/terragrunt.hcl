@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  bucket = "raj-dev-external-module-${get_aws_account_id()}"
+  bucket = "raj-dev-external-module-12345"
   
   versioning = {
     enabled = true

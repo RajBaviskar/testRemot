@@ -7,6 +7,6 @@ terraform {
 }
 
 inputs = {
-  bucket_name = "raj-dev-simple-bucket-${get_aws_account_id()}"
+  bucket_name = "raj-dev-simple-bucket-12345"
   environment = "dev"
 }
