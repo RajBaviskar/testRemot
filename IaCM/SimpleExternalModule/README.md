@@ -1,6 +1,8 @@
-# Simple External Module Setup
+# Module Reference Examples
 
-This Terragrunt setup demonstrates the **difference between direct resources and external modules** in state files.
+Minimal Terragrunt setup demonstrating two module reference patterns:
+1. **Git module reference** with version (like basicModuleRef pattern)
+2. **External module reference** from Terraform Registry with version
 
 ## Structure
 
@@ -8,56 +10,56 @@ This Terragrunt setup demonstrates the **difference between direct resources and
 SimpleExternalModule/
 ├── root.hcl                              # Root configuration with local backend
 ├── modules/
-│   ├── s3-simple/                        # Local module with direct S3 resources
-│   │   ├── main.tf
-│   │   └── outputs.tf
-│   └── s3-wrapper/                       # Wrapper module that CALLS external module
+│   └── s3-simple/                        # Simple S3 module for Git reference
 │       ├── main.tf
 │       └── outputs.tf
-├── environments/
-│   ├── dev/
-│   │   ├── s3-simple/                    # Direct resources (NO modules)
-│   │   │   └── terragrunt.hcl
-│   │   ├── s3-external/                  # External module AS root (no "module" in state)
-│   │   │   └── terragrunt.hcl
-│   │   └── s3-wrapper/                   # Wrapper calling external (HAS "module" in state)
-│   │       └── terragrunt.hcl
-│   └── prod/
-│       ├── s3-simple/                    # Direct resources (NO modules)
-│       │   └── terragrunt.hcl
-│       ├── s3-external/                  # External module AS root (no "module" in state)
-│       │   └── terragrunt.hcl
-│       └── s3-wrapper/                   # Wrapper calling external (HAS "module" in state)
-│           └── terragrunt.hcl
+├── git-module-ref/                       # References module from Git (like basicModuleRef)
+│   └── terragrunt.hcl
+├── external-module-ref/                  # References external module from Terraform Registry
+│   └── terragrunt.hcl
 ├── states/                               # Local state files (auto-generated)
 └── README.md
 ```
 
-## What's Included
+## Module Reference Patterns
 
-### 1. **Simple S3 Buckets** (Direct Resources)
-- **Location**: `modules/s3-simple`
-- **Type**: Local module with direct `aws_s3_bucket` resources
-- **State File**: Resources appear as `aws_s3_bucket.this` (NO module prefix)
-- **Environments**: `dev/s3-simple` and `prod/s3-simple`
+### 1. Git Module Reference (Similar to basicModuleRef)
+- **File**: `git-module-ref/terragrunt.hcl`
+- **Source**: Git repository with `?ref=main` for version control
+- **Pattern**: `git::https://github.com/USER/REPO.git//path/to/module?ref=main`
+- **Use Case**: Reference modules from Git with branch/tag pinning
 
-### 2. **External Module S3 Buckets** (External Module AS Root)
-- **Source**: `terraform-aws-modules/s3-bucket/aws` (version 4.1.0)
-- **Type**: External module from Terraform Registry used as root configuration
-- **State File**: Resources appear WITHOUT `module.` prefix (root-level resources)
-- **Environments**: `dev/s3-external` and `prod/s3-external`
-- **Note**: External module IS the root, so no "module" key in state
+### 2. External Module Reference (Terraform Registry)
+- **File**: `external-module-ref/terragrunt.hcl`
+- **Source**: Terraform Registry with `?version=4.1.0` for semantic versioning
+- **Pattern**: `tfr:///terraform-aws-modules/s3-bucket/aws?version=4.1.0`
+- **Use Case**: Reference public modules from Terraform Registry with version pinning
 
-### 3. **Wrapper Module S3 Buckets** (External Module CALLED by Wrapper)
-- **Location**: `modules/s3-wrapper` (calls external module)
-- **Type**: Local wrapper module that CALLS external module from Terraform Registry
-- **State File**: Resources appear WITH `module.s3_bucket` prefix
-- **Environments**: `dev/s3-wrapper` and `prod/s3-wrapper`
-- **Note**: This is where you'll see external modules in state!
+## Usage
 
-## How to Use
+### Git Module Reference
+```bash
+cd git-module-ref
+terragrunt init
+terragrunt plan
+terragrunt apply
 
-### Run All Environments
+# View state file
+cat ../states/git-module-ref/terraform.tfstate
+```
+
+### External Module Reference
+```bash
+cd external-module-ref
+terragrunt init
+terragrunt plan
+terragrunt apply
+
+# View state file
+cat ../states/external-module-ref/terraform.tfstate
+```
+
+### Run Both
 ```bash
 cd IaCM/SimpleExternalModule
 terragrunt run-all init
@@ -65,39 +67,10 @@ terragrunt run-all plan
 terragrunt run-all apply
 ```
 
-### Run Specific Environment
+## State File Output
 
-#### Dev Simple Bucket (NO external module)
-```bash
-cd environments/dev/s3-simple
-terragrunt init
-terragrunt plan
-terragrunt apply
-```
+Both patterns will show resources WITHOUT `"module"` prefix because Terragrunt makes the module source the ROOT configuration:
 
-#### Dev External Module Bucket
-```bash
-cd environments/dev/s3-external
-terragrunt init
-terragrunt plan
-terragrunt apply
-```
-
-### View State Files
-
-#### Simple bucket state (direct resources)
-```bash
-cat states/environments/dev/s3-simple/terraform.tfstate
-```
-
-#### External module bucket state
-```bash
-cat states/environments/dev/s3-external/terraform.tfstate
-```
-
-## State File Comparison
-
-### 1. Simple Bucket State (Direct Resources)
 ```json
 {
   "resources": [
@@ -109,72 +82,75 @@ cat states/environments/dev/s3-external/terraform.tfstate
   ]
 }
 ```
-**Notice**: No `"module"` key - direct resources
 
-### 2. External Module Bucket State (External Module AS Root)
-```json
-{
-  "resources": [
-    {
-      "type": "aws_s3_bucket",
-      "name": "this",
-      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]"
-    }
-  ]
-}
-```
-**Notice**: Still no `"module"` key - external module is the root configuration
-
-### 3. Wrapper Module Bucket State (External Module CALLED)
-```json
-{
-  "resources": [
-    {
-      "module": "module.s3_bucket",
-      "type": "aws_s3_bucket",
-      "name": "this"
-    }
-  ]
-}
-```
-**Notice**: Has `"module": "module.s3_bucket"` - external module is called by wrapper!
+**Note**: No `"module"` key appears in state when using Terragrunt's `terraform.source` pattern, as the module becomes the root configuration.
 
 ## Key Differences
 
-| Aspect | Simple Bucket | External (AS Root) | Wrapper (CALLS External) |
-|--------|--------------|-------------------|-------------------------|
-| **Module Type** | Local module | External from Registry | Local wrapper + External |
-| **Source** | `modules/s3-simple` | `tfr:///terraform-aws-modules/s3-bucket/aws` | `modules/s3-wrapper` |
-| **State File** | Direct resources | Direct resources (root) | Module-prefixed resources |
-| **Resource Address** | `aws_s3_bucket.this` | `aws_s3_bucket.this[0]` | `module.s3_bucket.aws_s3_bucket.this[0]` |
-| **"module" in State** | ❌ No | ❌ No | ✅ YES |
-| **Use Case** | Custom code | Use module directly | Add logic around module |
+| Aspect | Git Module Reference | External Module Reference |
+|--------|---------------------|---------------------------|
+| **Source Type** | Git repository | Terraform Registry |
+| **Source Pattern** | `git::https://...?ref=main` | `tfr:///module-path?version=4.1.0` |
+| **Version Syntax** | `?ref=<branch/tag>` | `?version=<semver>` |
+| **Version Example** | `?ref=v1.0.0` | `?version=4.1.0` |
+| **State File** | Direct resources (root) | Direct resources (root) |
+| **"module" in State** | ❌ No | ❌ No |
+| **Use Case** | Version control via Git | Use public registry modules |
 
 ## Clean Up
 
-### Destroy all environments
 ```bash
+# Destroy both
 terragrunt run-all destroy
-```
 
-### Destroy specific environment
-```bash
-cd environments/dev/s3-simple
-terragrunt destroy
+# Or individually
+cd git-module-ref && terragrunt destroy
+cd external-module-ref && terragrunt destroy
 ```
 
 ## Configuration Examples
 
-### Local Module Reference
+### Git Module Reference (Similar to basicModuleRef)
+**File**: `git-module-ref/terragrunt.hcl`
+
 ```hcl
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
 terraform {
-  source = "../../../modules/s3-simple"
+  source = "git::https://github.com/RajBaviskar/testRemot.git//IaCM/SimpleExternalModule/modules/s3-simple?ref=main"
+}
+
+inputs = {
+  bucket_name = "raj-git-ref-12345"
+  environment = "dev"
 }
 ```
 
-### External Module Reference
+### External Module Reference with Version
+**File**: `external-module-ref/terragrunt.hcl`
+
 ```hcl
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
 terraform {
   source = "tfr:///terraform-aws-modules/s3-bucket/aws?version=4.1.0"
 }
+
+inputs = {
+  bucket = "raj-external-ref-12345"
+  versioning = { enabled = true }
+  # ... additional configuration
+}
 ```
+
+## Version Pinning
+
+| Source Type | Version Syntax | Example |
+|-------------|----------------|----------|
+| **Git** | `?ref=<branch/tag>` | `?ref=main` or `?ref=v1.0.0` |
+| **Terraform Registry** | `?version=<semver>` | `?version=4.1.0` or `?version=~> 4.1` |
+| **Local** | No version needed | `../../modules/s3-simple` |
