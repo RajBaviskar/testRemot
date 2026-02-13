@@ -13,4 +13,5 @@ inputs = {
   project       = "enterprise-app"
   instance_type = "t3.large"
   bucket_name   = "raj-prod-bucket-default"
+  db_password   = "ProdPassword456!"
 }

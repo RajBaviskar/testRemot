@@ -12,4 +12,5 @@ inputs = {
   owner       = "prod-team"
   project     = "enterprise-app"
   bucket_name = "raj-prod-bucket-unique-prod"
+  access_key  = "AKIAPRODEXAMPLE789"
 }
