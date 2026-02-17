@@ -73,6 +73,7 @@ locals {
     Environment = var.environment
     Project     = var.project
     ManagedBy   = "Terragrunt"
+    TestTag     = "pruning-test"
   }
   
   instance_name = "raj-${var.project}-${var.environment}-instance"
