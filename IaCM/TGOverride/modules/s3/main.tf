@@ -46,7 +46,7 @@ locals {
     Environment = var.environment
     Project     = var.project
     ManagedBy   = "Terragrunt"
-    TestTag     = "pruning-test"
+    TestTag     = "pruning-test-new-tag"
   }
 }
 
