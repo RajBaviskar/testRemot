@@ -11,7 +11,7 @@ inputs = {
   environment   = "development"
   owner         = "dev-team"
   project       = "simple-tg"
-  instance_type = "t3.micro"
+  instance_type = "t3.large"
   bucket_name   = "raj-dev-bucket-default"
   db_password   = "DevPassword123!"
 }
