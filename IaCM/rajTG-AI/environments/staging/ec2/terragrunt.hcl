@@ -8,7 +8,7 @@ terraform {
 
 inputs = {
   instance_count = 2
-  instance_type  = "t3.large"
+instance_type  = "t3.micro"
   environment    = "staging"
   owner         = "staging-team"
 }
