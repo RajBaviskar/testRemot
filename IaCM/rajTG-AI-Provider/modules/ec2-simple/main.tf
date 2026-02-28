@@ -16,7 +16,7 @@ resource "aws_instance" "this" {
   
   # This worked in provider 4.x, but provider 5.x changed validation rules
   # Cannot specify both subnet_id and vpc_security_group_ids with network_interface attachment
-  subnet_id              = "subnet-12345"
+# Remove subnet_id
 # Remove vpc_security_group_ids
   
   network_interface {
