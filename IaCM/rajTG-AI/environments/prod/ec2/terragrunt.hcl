@@ -8,7 +8,7 @@ terraform {
 
 inputs = {
   instance_count = 2
-instance_type  = "t2.micro"
+instance_type  = "t2.small"
   environment    = "prod"
   owner          = "prod-team"
 }
