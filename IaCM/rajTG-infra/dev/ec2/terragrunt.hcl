@@ -1,0 +1,22 @@
+include {
+  path = find_in_parent_folders()
+}
+
+terraform {
+  source = "../../modules/ec2"
+}
+
+generate "backend" {
+  path      = "backend.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+terraform {
+  backend "s3" {}
+}
+EOF
+}
+
+inputs = {
+  instance_type  = "t3.micro"
+  iam_role_name  = "dev-raj-ec2-role"
+}
