@@ -16,6 +16,16 @@ terraform {
 EOF
 }
 
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+provider "aws" {
+  region = "us-east-1"
+}
+EOF
+}
+
 inputs = {
   role_name = "dev-raj-ec2-role"
   s3_bucket = "dev-raj-seq-artifacts"
