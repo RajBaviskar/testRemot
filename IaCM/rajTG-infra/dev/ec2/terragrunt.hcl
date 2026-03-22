@@ -27,6 +27,6 @@ EOF
 }
 
 inputs = {
-  instance_type  = "t2.small"
+  instance_type  = "t3.large"
   iam_role_name  = "dev-raj-ec2-role"
 }
