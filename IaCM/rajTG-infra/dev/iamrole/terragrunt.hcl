@@ -27,6 +27,6 @@ EOF
 }
 
 inputs = {
-  role_name = "dev-raj-ec2-role"
+  role_name = "dev-raj-ec2-role-new"
   s3_bucket = "dev-raj-seq-artifacts"
 }
