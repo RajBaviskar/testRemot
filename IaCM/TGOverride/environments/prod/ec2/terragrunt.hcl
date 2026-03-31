@@ -11,7 +11,7 @@ inputs = {
   environment   = "production"
   owner         = "prod-team"
   project       = "enterprise-app"
-  instance_type = "t3.large"
+  instance_type = "t2.small"
   bucket_name   = "raj-prod-bucket-default"
   db_password   = "ProdPassword456!"
 }
