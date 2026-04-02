@@ -9,5 +9,5 @@ terraform {
 inputs = {
   environment     = "dev"
   region          = "us-east-1"
-  instance_type   = "t3.large"  # Costs ~$0.0416/hour (~$30/month)
+  instance_type   = "t3.small"  # Costs ~$0.0416/hour (~$30/month)
 }
