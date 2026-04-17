@@ -102,7 +102,7 @@ resource "aws_instance" "main" {
   tags = merge(local.common_tags, {
     Name = local.instance_name
   })
-}
+# SYNTAX ERROR: Missing closing brace for resource block
 
 # Additional EBS volume for increased storage and cost
 resource "aws_ebs_volume" "additional" {
