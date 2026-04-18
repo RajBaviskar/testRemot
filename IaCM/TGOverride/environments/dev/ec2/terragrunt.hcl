@@ -9,7 +9,7 @@ terraform {
 
 inputs = {
   environment   = "development"
-  # MISSING VARIABLE TEST: Removed owner to trigger REQUIRED_FIELD_MISSING
+  owner         = "dev-team"
   project       = "simple-tg"
   instance_type = "t2.small"
   bucket_name   = "raj-dev-bucket-default"
