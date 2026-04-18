@@ -47,7 +47,7 @@ remote_state {
 # Common inputs for all modules - these will be passed as TF variables
 inputs = {
   # Default values that can be overridden via CLI: terragrunt plan -var="owner=custom-owner"
-  owner       = local.common_vars.owner
+  # MISSING VARIABLE TEST: Removed owner to trigger REQUIRED_FIELD_MISSING
   environment = local.common_vars.environment
   project     = local.common_vars.project
 }

@@ -1,8 +1,8 @@
 # EC2 instance module with variable support
 variable "owner" {
-  description = "Owner of the resources"
+  description = "Owner of the resources (REQUIRED - no default)"
   type        = string
-  default     = "default-owner"
+  # MISSING VARIABLE TEST: Removed default value to trigger REQUIRED_FIELD_MISSING
 }
 
 variable "environment" {
@@ -102,7 +102,7 @@ resource "aws_instance" "main" {
   tags = merge(local.common_tags, {
     Name = local.instance_name
   })
-# SYNTAX ERROR: Missing closing brace for resource block
+}
 
 # Additional EBS volume for increased storage and cost
 resource "aws_ebs_volume" "additional" {
