@@ -67,20 +67,12 @@ variable "db_password" {
   sensitive   = true
 }
 
-# MISSING VARIABLE TEST: Required variable with no default and not provided anywhere
-variable "cost_center" {
-  description = "Cost center code (REQUIRED)"
-  type        = string
-  # No default - this will trigger REQUIRED_FIELD_MISSING error
-}
-
 locals {
   common_tags = {
     Owner       = var.owner
     Environment = var.environment
     Project     = var.project
     ManagedBy   = "Terragrunt"
-    CostCenter  = var.cost_center  # Reference to missing variable
   }
 
   instance_name = "raj-${var.project}-${var.environment}-instance"
