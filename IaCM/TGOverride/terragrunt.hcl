@@ -8,43 +8,41 @@ locals {
   }
 }
 
-# Add terraform block to force root to be treated as a module
-terraform {
-  source = "."
+# Generate provider configuration
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents  = <<EOF
+provider "aws" {
+  region = "us-east-1"
 }
 
-# Generate provider configuration - DISABLED TO TRIGGER ERROR
-# generate "provider" {
-#   path      = "provider.tf"
-#   if_exists = "overwrite_terragrunt"
-#   contents  = <<EOF
-# provider "aws" {
-#   region = "us-east-1"
-# }
-#
-# terraform {
-#   required_version = ">= 1.0"
-#   required_providers {
-#     aws = {
-#       source  = "hashicorp/aws"
-#       version = "~> 5.0"
-#     }
-#   }
-# }
-# EOF
-# }
+terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+EOF
+}
 
-# Local backend - DISABLED TO TRIGGER ERROR
-# remote_state {
-#   backend = "local"
-#   config = {
-#     path = "${get_terragrunt_dir()}/terraform.tfstate"
-#   }
-#   generate = {
-#     path      = "backend.tf"
-#     if_exists = "overwrite_terragrunt"
-#   }
-# }
+# S3 remote state backend
+remote_state {
+  backend = "s3"
+  config = {
+    bucket  = "rajtgoverrides6bucket"
+    key     = "${path_relative_to_include()}/terraform.tfstate"
+    region  = "us-east-1"
+    encrypt = true
+  }
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+}
 
 # Common inputs for all modules - these will be passed as TF variables
 inputs = {
