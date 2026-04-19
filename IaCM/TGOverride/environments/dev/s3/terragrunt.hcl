@@ -4,7 +4,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../../modules/s3-nonexistent"
+  source = "../../../modules/s3"
 }
 
 inputs = {
