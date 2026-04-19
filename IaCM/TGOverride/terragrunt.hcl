@@ -29,14 +29,11 @@ terraform {
 EOF
 }
 
-# S3 remote state backend
+# Local backend for development
 remote_state {
-  backend = "s3"
+  backend = "local"
   config = {
-    bucket  = "rajtgoverrides6bucket"
-    key     = "${path_relative_to_include()}/terraform.tfstate"
-    region  = "us-east-1"
-    encrypt = true
+    path = "${get_parent_terragrunt_dir()}/states/${path_relative_to_include()}/terraform.tfstate"
   }
   generate = {
     path      = "backend.tf"
