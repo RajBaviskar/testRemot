@@ -11,6 +11,6 @@ inputs = {
   environment = "production"
   owner       = "prod-team"
   project     = "enterprise-app"
-  bucket_name = "raj-prod-bucket-unique-prod-${get_aws_account_id()}"
+  bucket_name = "raj-prod-bucket-unique-prod"
   access_key  = "AKIAPRODEXAMPLE789"
 }
