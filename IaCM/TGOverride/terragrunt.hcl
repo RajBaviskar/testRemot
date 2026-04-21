@@ -1,16 +1,14 @@
 # Root Terragrunt Configuration
 # This file is referenced by child modules via find_in_parent_folders()
 
-locals {
-  # Define state path based on the relative path from root
-  state_file_path = "${get_repo_root()}/IaCM/TGOverride/states/${path_relative_to_include()}/terraform.tfstate"
-}
-
-# Configure Terragrunt to automatically store tfstate files in environment-specific locations
+# Configure Terragrunt to automatically store tfstate files in S3
 remote_state {
-  backend = "local"
+  backend = "s3"
   config = {
-    path = local.state_file_path
+    bucket  = "rajtgoverrides6bucket"
+    key     = "${path_relative_to_include()}/terraform.tfstate"
+    region  = "us-east-1"
+    encrypt = true
   }
   generate = {
     path      = "backend.tf"
