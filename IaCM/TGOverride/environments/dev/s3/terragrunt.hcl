@@ -11,6 +11,6 @@ inputs = {
   environment = "development"
   owner       = "dev-team"
   project     = "simple-tg"
-  bucket_name = "raj-dev-bucket-unique-dev"
+  bucket_name = "raj-dev-bucket-unique-dev-${get_aws_account_id()}"
   access_key  = "AKIADEVEXAMPLE123"
 }
