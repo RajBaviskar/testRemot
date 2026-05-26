@@ -4,10 +4,6 @@ locals {
   dynamodb_table  = "tg-infra-prod2-lock"
 }
 
-inputs = {
-  instance_type = "t2.small"
-}
-
 remote_state {
   backend = "s3"
   generate = {
