@@ -17,7 +17,6 @@ EOF
 }
 
 inputs = {
-  instance_type  = "t3.small"
   instance_name  = "prod-ec2-server"
   environment    = "prod"
 }

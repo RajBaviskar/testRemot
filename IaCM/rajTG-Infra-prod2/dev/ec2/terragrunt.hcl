@@ -17,7 +17,6 @@ EOF
 }
 
 inputs = {
-  instance_type  = "t3.micro"
   instance_name  = "dev-ec2-server"
   environment    = "dev"
 }
