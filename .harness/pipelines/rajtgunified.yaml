@@ -12,3 +12,7 @@ pipeline:
             uses: terragruntStep@1.0.3
             with:
               command: init
+  inputs:
+    workspace:
+      type: string
+      default: rajTGUnified
