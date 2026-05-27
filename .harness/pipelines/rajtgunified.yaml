@@ -6,3 +6,9 @@ pipeline:
         - name: Step
           id: step
           run: echo "hello world"
+        - name: rajTG
+          id: rajtg
+          iacm:
+            uses: terragruntStep@1.0.3
+            with:
+              command: init
