@@ -14,7 +14,7 @@ pipeline:
             with:
               command: init
               connectorRef: account.rajdocker
-              image: harnessdev/dev:265
+              image: harnessdev/dev:270
   inputs:
     workspace:
       type: string
