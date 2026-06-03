@@ -11,7 +11,7 @@ pipeline:
             with:
               command: init
               connectorRef: account.rajdocker
-              image: harnessdev/dev:270
+              image: harnessdev/dev:271
         - name: plan
           id: plan
           iacm:
@@ -19,7 +19,7 @@ pipeline:
             with:
               command: plan
               connectorRef: account.rajdocker
-              image: harnessdev/dev:270
+              image: harnessdev/dev:271
         - name: apply
           id: apply
           iacm:
@@ -27,7 +27,7 @@ pipeline:
             with:
               command: apply
               connectorRef: account.rajdocker
-              image: harnessdev/dev:270
+              image: harnessdev/dev:271
   inputs:
     workspace:
       type: string
