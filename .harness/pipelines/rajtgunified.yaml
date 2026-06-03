@@ -4,12 +4,28 @@ pipeline:
       id: stage
       workspace: <+inputs.workspace>
       steps:
-        - name: rajTG
-          id: rajtg
+        - name: init
+          id: init
           iacm:
             uses: rajtgtemp@1.0.4
             with:
               command: init
+              connectorRef: account.rajdocker
+              image: harnessdev/dev:270
+        - name: plan
+          id: plan
+          iacm:
+            uses: rajtgtemp@1.0.4
+            with:
+              command: plan
+              connectorRef: account.rajdocker
+              image: harnessdev/dev:270
+        - name: apply
+          id: apply
+          iacm:
+            uses: rajtgtemp@1.0.4
+            with:
+              command: apply
               connectorRef: account.rajdocker
               image: harnessdev/dev:270
   inputs:
