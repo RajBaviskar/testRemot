@@ -7,7 +7,7 @@ pipeline:
         - name: rajTG
           id: rajtg
           iacm:
-            uses: terragruntStep@1.0.3
+            uses: rajtgtemp@1.0.4
             with:
               command: init
               connectorRef: account.rajdocker
