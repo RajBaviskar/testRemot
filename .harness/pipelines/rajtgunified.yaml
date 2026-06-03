@@ -4,9 +4,6 @@ pipeline:
       id: stage
       workspace: <+inputs.workspace>
       steps:
-        - name: Step
-          id: step
-          run: echo "hello world"
         - name: rajTG
           id: rajtg
           iacm:
