@@ -22,6 +22,12 @@ pipeline:
             uses: rajtgtemp@1.0.4
             with:
               command: apply
+  variables:
+          - name: DEBUG
+            type: String
+            description: ""
+            required: false
+            value: "1"
   inputs:
     workspace:
       type: string
