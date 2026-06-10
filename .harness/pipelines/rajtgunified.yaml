@@ -10,18 +10,24 @@ pipeline:
             uses: rajtgtemp@1.0.4
             with:
               command: init
+              connectorRef: account.rajdocker
+              image: harnessdev/dev:272
         - name: plan
           id: plan
           iacm:
             uses: rajtgtemp@1.0.4
             with:
               command: plan
+              connectorRef: account.rajdocker
+              image: harnessdev/dev:272
         - name: apply
           id: apply
           iacm:
             uses: rajtgtemp@1.0.4
             with:
               command: apply
+              connectorRef: account.rajdocker
+              image: harnessdev/dev:272
   variables:
           - name: DEBUG
             type: String
