@@ -1,0 +1,16 @@
+---
+- name: hello_world_playbook
+  hosts: all
+  vars:
+    PlaybookVariableKey: "Value"
+  tasks:
+    - name: Ping my hosts
+      ansible.builtin.ping:
+
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello from {{ ansible_facts['hostname'] }} this should be my play book
+
+    - name: Print variable
+      ansible.builtin.debug:
+        msg: "Variable value is {{ PlaybookVariableKey }}"

@@ -1,0 +1,6 @@
+---
+- name: Configure all instances
+  hosts: all
+  become: true
+  roles:
+    - common
