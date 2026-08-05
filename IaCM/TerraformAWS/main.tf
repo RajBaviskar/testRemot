@@ -2,17 +2,25 @@ resource "aws_instance" "example" {
   ami           = var.ami_id
   instance_type = var.instance_type
 
-  tags = {
+  tags = merge(var.resource_tags, {
     Name = var.instance_name
-  }
+  })
 }
 
 # S3 Bucket
 resource "aws_s3_bucket" "example" {
   bucket = var.bucket_name
 
-  tags = {
+  tags = merge(var.resource_tags, {
     Name = "example-bucket"
+  })
+}
+
+resource "aws_s3_bucket_versioning" "example" {
+  bucket = aws_s3_bucket.example.id
+
+  versioning_configuration {
+    status = var.enable_versioning ? "Enabled" : "Suspended"
   }
 }
 

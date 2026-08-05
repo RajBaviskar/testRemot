@@ -21,3 +21,21 @@ variable "bucket_name" {
   type        = string
   default     = "raj-tf-s3-bucket"
 }
+
+variable "enable_versioning" {
+  description = "Enable versioning on the S3 bucket"
+  type        = bool
+  default     = false
+}
+
+variable "resource_tags" {
+  description = "Tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "allowed_cidrs" {
+  description = "List of allowed CIDR blocks"
+  type        = list(string)
+  default     = []
+}
