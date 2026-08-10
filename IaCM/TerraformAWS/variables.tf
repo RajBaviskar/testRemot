@@ -76,6 +76,13 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
+# number type (for testing IaCM number value_type)
+variable "numbertemp" {
+  description = "Temporary number variable for testing IaCM number value type"
+  type        = number
+  default     = 1.0
+}
+
 # complex json type
 variable "scaling_config" {
   description = "Auto-scaling configuration as JSON"
