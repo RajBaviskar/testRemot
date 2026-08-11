@@ -2,7 +2,7 @@
 ami_id        = "ami-05b10e08d247fb927"
 instance_type = "t2.micro"
 instance_name = "raj-devspace-test"
-bucket_name   = "raj-devspace-test-bucket"
+bucket_name   = "raj-devspace3-tf-bucket"
 
 # boolean type
 enable_versioning = true

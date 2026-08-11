@@ -27,5 +27,5 @@ resource "aws_s3_bucket_versioning" "example" {
 
 # S3 Bucket for import
 resource "aws_s3_bucket" "testexample" {
-  bucket = "raj-test-import"
+  bucket = "raj-devspace3-test-import"
 }

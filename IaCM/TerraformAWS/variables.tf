@@ -19,7 +19,7 @@ variable "instance_name" {
 variable "bucket_name" {
   description = "The name of the S3 bucket"
   type        = string
-  default     = "raj-tf-s3-bucket"
+  default     = "raj-devspace3-tf-bucket"
 }
 
 # boolean type
