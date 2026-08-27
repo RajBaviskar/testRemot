@@ -20,6 +20,20 @@ pipeline:
               command: plan
               connectorRef: account.rajdocker
               image: harnessdev/dev:272
+        - name: approval
+          approval:
+            with:
+              message: Please review Plan
+              execution-details: true
+              auto-reject: false
+              user-groups:
+                - _project_all_users
+              approvers-min-count: 1
+              block-executor: false
+              auto-approve: false
+              inputs: {}
+            uses: harness
+          id: approval
         - name: apply
           id: apply
           iacm:
@@ -29,11 +43,11 @@ pipeline:
               connectorRef: account.rajdocker
               image: harnessdev/dev:272
   variables:
-          - name: DEBUG
-            type: String
-            description: ""
-            required: false
-            value: "1"
+    - name: DEBUG
+      type: String
+      description: ""
+      required: false
+      value: "1"
   inputs:
     workspace:
       type: string
