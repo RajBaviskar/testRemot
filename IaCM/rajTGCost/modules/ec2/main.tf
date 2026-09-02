@@ -26,7 +26,7 @@ resource "aws_instance" "demo" {
 }
 
 output "instance_id" {
-  description = "ID of the EC2 instance test"
+  description = "ID of the EC2 instance test pr"
   value       = aws_instance.demo.id
 }
 
