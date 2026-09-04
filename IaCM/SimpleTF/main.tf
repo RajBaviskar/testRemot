@@ -36,6 +36,7 @@ variable "secret_value" {
 
 output "secrets_manager_arn" {
   value = var.enable_secret ? var.secret_value : null
+  sensitive = true
 }
 
 output "file_content" {
