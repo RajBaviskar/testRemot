@@ -23,6 +23,21 @@ resource "local_file" "example" {
   filename = "${path.module}/example.txt"
 }
 
+variable "enable_secret" {
+  type    = bool
+  default = true
+}
+
+variable "secret_value" {
+  type      = string
+  sensitive = true
+  default   = "test-sensitive-value"
+}
+
+output "secrets_manager_arn" {
+  value = var.enable_secret ? var.secret_value : null
+}
+
 output "file_content" {
   value = local_file.example.content
 }
